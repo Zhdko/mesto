@@ -36,9 +36,7 @@
 @import url(../blocks/button-icon/button-icon.css);
 @import url(../blocks/button-icon/_action/button-icon_action_add.css);
 @import url(../blocks/button-icon/_action/button-icon_action_edit.css);
-@import url(../blocks/edit-button/edit-button.css);
 @import url(../blocks/userjob/userjob.css);
-@import url(../blocks/add-button/add-button.css);
 
 /* gallery */
 @import url(../blocks/gallery/gallery.css);
