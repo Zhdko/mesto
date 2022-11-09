@@ -1,2 +1,12 @@
-.heart-icon {
+.heart-icon{
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+
+.heart-icon:hover {
+  opacity: 0.5;
+}
+
+.heart-icon_active path:last-child {
+  fill: black;
 }
