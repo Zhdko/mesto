@@ -17,6 +17,16 @@
   }
 }
 
-.button-icon:focus path{
+.button-icon_action_edit:focus {
+  outline: none;
+  background-color: #fff;
+  opacity: 1;
+}
+.button-icon_action_edit::-moz-focus-inner {
+  border: 0;
+}
+
+
+.button-icon_action_edit:focus path{
   fill: black
 }

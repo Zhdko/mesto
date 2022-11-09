@@ -1,4 +1,4 @@
-.form__submit-btn {
+.popup__submit-btn {
   border: none;
   background-color: #000;
   color: #fff;
@@ -6,15 +6,13 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 0.82;
-  margin: 48px 0 0;
   box-sizing: border-box;
   padding: 17px;
   border-radius: 2px;
 }
 
 @media screen and (max-width: 400px) {
-  .form__submit-btn {
+  .popup__submit-btn {
     font-size: 14px;
-    margin: 45px 0 0;
   }
 }

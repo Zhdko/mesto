@@ -5,6 +5,19 @@
   border-radius: 2px;
 }
 
+.button-icon_action_add:focus {
+  outline: none;
+  background-color: #fff;
+  opacity: 1;
+}
+.button-icon_action_add::-moz-focus-inner {
+  border: 0;
+}
+
+.button-icon_action_add:focus path{
+  fill: black
+}
+
 @media screen and (max-width: 843px) {
   .button-icon_action_add {
     margin-left: 0;

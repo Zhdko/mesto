@@ -6,6 +6,18 @@
   right: -40px;
 }
 
+.button-icon_action_close:hover {
+  opacity: 0.6;
+}
+
+.button-icon_action_close:focus {
+  outline: none;
+  opacity: 0.6;
+}
+.button-icon_action_close::-moz-focus-inner {
+  border: 0;
+}
+
 @media screen and (max-width: 576px) {
   .button-icon_action_close {
     right: 0;

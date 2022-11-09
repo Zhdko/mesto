@@ -4,11 +4,13 @@
   height: 100vh;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   padding: 0 19px;
   z-index: 1;
+  visibility: hidden;
+  transition: all 1s ease;
 }

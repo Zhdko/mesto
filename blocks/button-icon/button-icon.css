@@ -10,11 +10,3 @@
 .button-icon:hover {
   opacity: 0.6;
 }
-
-.button-icon:focus {
-  outline: none;
-  background-color: #fff;
-}
-.button-icon::-moz-focus-inner {
-  border: 0;
-}
