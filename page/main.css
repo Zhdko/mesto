@@ -26,3 +26,15 @@
 @import url(../blocks/edit-button/edit-button.css);
 @import url(../blocks/userjob/userjob.css);
 @import url(../blocks/add-button/add-button.css);
+
+/* gallery */
+@import url(../blocks/gallery/gallery.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__footer/card__footer.css);
+@import url(../blocks/heart-icon/heart-icon.css);
+@import url(../blocks/card/__image/card__image.css);
+
+/* footer */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
