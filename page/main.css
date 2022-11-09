@@ -46,6 +46,7 @@
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__footer/card__footer.css);
 @import url(../blocks/heart-icon/heart-icon.css);
+@import url(../blocks/heart-icon/_active/heart-icon_active.css);
 @import url(../blocks/card/__image/card__image.css);
 
 /* footer */

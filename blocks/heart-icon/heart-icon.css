@@ -6,7 +6,3 @@
 .heart-icon:hover {
   opacity: 0.5;
 }
-
-.heart-icon_active path:last-child {
-  fill: black;
-}
