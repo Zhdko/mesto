@@ -1,0 +1,22 @@
+.button-icon_action_edit {
+  border: 1px solid #fff;
+  width: 24px;
+  height: 24px;
+  position:absolute;
+  right: -42px;
+  top: 15px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 576px) {
+  .button-icon_action_edit {
+    width: 18px;
+    height: 18px;
+    top:8px;
+    right: -28px;
+  }
+}
+
+.button-icon:focus path{
+  fill: black
+}

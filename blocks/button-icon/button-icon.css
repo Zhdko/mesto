@@ -1,0 +1,19 @@
+.button-icon {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: all 0.1s ease;
+}
+
+.button-icon:hover {
+  opacity: 0.6;
+}
+
+.button-icon:focus {
+  outline: none;
+  background-color: #fff;
+}
+.button-icon::-moz-focus-inner {
+  border: 0;
+}

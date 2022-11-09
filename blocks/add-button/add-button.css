@@ -1,0 +1,22 @@
+.add-button {
+  padding: 0;
+  cursor: pointer;
+  width: 150px;
+  min-height: 50px;
+  display:inline-block;
+  background:
+    linear-gradient(#fff,#fff),
+    linear-gradient(#fff,#fff);
+  background-position:center;
+  background-size: 22px 2px,2px 22px;
+  background-repeat:no-repeat;
+  border: 2px solid #FFF;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 576px) {
+  .add-button {
+    width: 100%;
+    background-size: 16px 2px,2px 16px;
+  }
+}

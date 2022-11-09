@@ -1,0 +1,24 @@
+.button-icon_action_add {
+  width: 150px;
+  height: 50px;
+  border: 2px solid #FFF;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 843px) {
+  .button-icon_action_add {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .button-icon_action_add {
+    width: 100%;
+    background-size: 16px 2px,2px 16px;
+  }
+  .button-icon_action_add svg{
+    width: 16px;
+    height: 16px;
+  }
+}
+
