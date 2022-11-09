@@ -9,6 +9,12 @@
   box-sizing: border-box;
   padding: 17px;
   border-radius: 2px;
+  transition:all 0.3s ease;
+  cursor: pointer;
+}
+
+.popup__submit-btn:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 400px) {
