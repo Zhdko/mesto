@@ -1,0 +1,13 @@
+.form {
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-width: 430px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 576px){
+  .form{
+    min-width: 100%;
+  }
+}

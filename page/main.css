@@ -13,6 +13,19 @@
 @import url(../blocks/content/content.css);
 @import url(../blocks/content/__main/content__main.css);
 
+/* form-edit */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__edit/form__edit.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__text/form__text.css);
+@import url(../blocks/form/__text/_type/form__text_type_uername.css);
+@import url(../blocks/form/__text/_type/form__text_type_userjob.css);
+@import url(../blocks/form/__submit-btn/form__submit-btn.css);
+@import url(../blocks/form/__submit-btn/_place/form__submit-btn_place_edit-form.css);
+@import url(../blocks/button-icon/_action/button-icon_action_close.css);
+
+
 /* profile */
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/avatar/avatar.css);
@@ -21,7 +34,6 @@
 @import url(../blocks/username/username.css);
 @import url(../blocks/button-icon/button-icon.css);
 @import url(../blocks/button-icon/_action/button-icon_action_add.css);
-@import url(../blocks/button-icon/_action/button-icon_action_close.css);
 @import url(../blocks/button-icon/_action/button-icon_action_edit.css);
 @import url(../blocks/edit-button/edit-button.css);
 @import url(../blocks/userjob/userjob.css);

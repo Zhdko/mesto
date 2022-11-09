@@ -1,0 +1,9 @@
+.form__edit {
+  padding: 34px 36px 37px;
+  border-radius: 10px;
+}
+@media screen and (max-width: 400px) {
+  .form__edit {
+    padding: 25px 22px;
+  }
+}
