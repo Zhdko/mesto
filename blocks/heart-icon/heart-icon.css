@@ -1,4 +1,10 @@
 .heart-icon{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   cursor:pointer;
   transition:all 0.3s ease;
   width: 22px;

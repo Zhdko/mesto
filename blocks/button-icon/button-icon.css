@@ -1,7 +1,17 @@
 .button-icon {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0;
   cursor: pointer;
   box-sizing: border-box;
   transition: all 0.1s ease;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .button-icon:hover {

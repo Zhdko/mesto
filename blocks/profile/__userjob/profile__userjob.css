@@ -1,4 +1,4 @@
-.userjob {
+.profile__userjob {
   margin: 0;
   color: #fff;
   font-family: 'Inter', Arial, sans-serif;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 576px) {
-  .userjob {
+  .profile__userjob {
     font-size: 14px;
     line-height: 1.2;
   }
