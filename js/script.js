@@ -1,8 +1,8 @@
 let content = document.querySelector('.content');
-let editButton = content.querySelector('.button-icon_action_edit');
+let editButton = content.querySelector('.button-icon__edit');
 let popup = content.querySelector('.popup');
 let saveButton = popup.querySelector('.popup__submit-btn_place_edit-form');
-let closeButton = popup.querySelector('.button-icon_action_close')
+let closeButton = popup.querySelector('.button-icon__close')
 
 function openPopup() {
   popup.classList.toggle('popup_opened')
@@ -19,6 +19,7 @@ let userjob = content.querySelector('.userjob')
 
 inputUsername.value = username.textContent
 inputUserjob.value = userjob.textContent
+
 
 let editForm = popup.querySelector('.popup__container');
 function formSubmitHandler (evt) {

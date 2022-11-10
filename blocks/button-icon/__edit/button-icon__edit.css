@@ -1,0 +1,19 @@
+.button-icon__edit {
+  border: 1px solid #fff;
+  width: 24px;
+  height: 24px;
+  position:absolute;
+  right: -42px;
+  top: 15px;
+  padding: 7px;
+}
+
+@media screen and (max-width: 576px) {
+  .button-icon__edit {
+    width: 18px;
+    height: 18px;
+    top:8px;
+    right: -28px;
+    padding: 5.25px;
+  }
+}

@@ -1,12 +1,17 @@
 .button-icon {
-  padding: 0;
   cursor: pointer;
-  background-color: transparent;
   box-sizing: border-box;
   transition: all 0.1s ease;
-  border: none;
 }
 
 .button-icon:hover {
   opacity: 0.6;
+}
+
+.button-icon_action_edit:focus {
+  outline: none;
+  opacity: 0.5;
+}
+.button-icon_action_edit::-moz-focus-inner {
+  border: 0;
 }

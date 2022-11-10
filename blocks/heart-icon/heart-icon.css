@@ -1,6 +1,11 @@
 .heart-icon{
   cursor:pointer;
   transition:all 0.3s ease;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../image/heart.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .heart-icon:hover {

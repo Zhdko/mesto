@@ -11,6 +11,4 @@
   box-sizing: border-box;
   padding: 0 19px;
   z-index: 1;
-  visibility: hidden;
-  transition: all 1s ease;
 }
