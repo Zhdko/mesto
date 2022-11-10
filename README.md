@@ -10,8 +10,7 @@
   - [Построен с](#Построен-с)
   - [Чему я научился](#Чему-я-научился)
   - [Что хочу изучить](#Что-хочу-изучить)
-- [Авторы](#Авторы)
-- [Acknowledgments](#acknowledgments)
+- [Автор](#Автор)
 
 ## Обзор
 
@@ -51,8 +50,7 @@
   - Больше JS
   - Git на более продвинутом уровне
 
-## Авторы
+## Автор
 
 - Александр Жданко - [https://github.com/Zhdko](https://github.com/Zhdko)
-- Сергей Васильев - [https://github.com/SergeyVasilev-bee](https://github.com/SergeyVasilev-bee)
 
