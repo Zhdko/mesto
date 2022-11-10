@@ -15,7 +15,7 @@
 }
 
 .button-icon_action_add:focus path{
-  fill: black
+  fill: black;
 }
 
 @media screen and (max-width: 843px) {

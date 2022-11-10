@@ -5,7 +5,7 @@
 
 .link:focus {
   outline: none;
-  opacity: 0.6
+  opacity: 0.6;
 }
 .link::-moz-focus-inner {
   border: 0;
