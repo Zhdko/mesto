@@ -1,4 +1,4 @@
-.button-icon__edit {
+.button-icon_action_edit {
   border: 1px solid #fff;
   width: 24px;
   height: 24px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 576px) {
-  .button-icon__edit {
+  .button-icon_action_edit {
     width: 18px;
     height: 18px;
     top:8px;
