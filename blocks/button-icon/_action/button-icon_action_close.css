@@ -16,3 +16,11 @@
     height: 20px;
   }
 }
+
+@media screen and (max-height: 450px) and (min-width: 576px){
+  .button-icon_action_close {
+    right: -50px;
+    top: 0;
+  }
+}
+
