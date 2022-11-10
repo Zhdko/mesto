@@ -1,4 +1,4 @@
-.heart-icon{
+.card__like{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -14,6 +14,6 @@
   background-repeat: no-repeat;
 }
 
-.heart-icon:hover {
+.card__like:hover {
   opacity: 0.5;
 }
