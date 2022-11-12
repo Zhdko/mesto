@@ -4,11 +4,12 @@
   flex-direction: column;
   gap: 7px;
   position: relative;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 @media screen and (max-width: 500px) {
   .profile__info {
+    max-width: 250px;
     margin: 26px auto 34px;
     text-align: center;
   }
