@@ -4,7 +4,10 @@
   height: 100vh;
   top: 0;
   left: 0;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
