@@ -85,6 +85,10 @@ const createElement = (item) => {
     fullImage.src = item.link;
     fullImage.alt = galleryItemImg.alt
     fullImageCaption.textContent = item.title;
+
+    fullImage.addEventListener('click', function () {
+      fullImage.closest('.popup').classList.remove('popup_opened');
+    })
   });
 
   likeButton.addEventListener('click', handleLikeButton);
