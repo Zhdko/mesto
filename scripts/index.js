@@ -8,6 +8,7 @@ const inputUsername = document.querySelector('.popup__text_type_username');
 const inputUserjob = document.querySelector('.popup__text_type_userjob');
 const popupEdit = document.querySelector('.popup_action_edit-profile');
 const popupAdd = document.querySelector('.popup_action_add-place');
+const popupImage = document.querySelector('.popup_action_open-img')
 
 const username = content.querySelector('.profile__username');
 const userjob = content.querySelector('.profile__userjob');
@@ -74,6 +75,17 @@ const createElement = (item) => {
   const galleryItemImg = galleryItem.querySelector('.card__image');
   const likeButton = galleryItem.querySelector('.card__like');
   const deleteButton = galleryItem.querySelector('.card__delete');
+
+  galleryItemImg.addEventListener('click', function() {
+    const fullImage = document.querySelector('.full-width__image');
+    const fullImageCaption = document.querySelector('.full-width__caption');
+
+    popupImage.classList.toggle('popup_opened');
+
+    fullImage.src = item.link;
+    fullImage.alt = galleryItemImg.alt
+    fullImageCaption.textContent = item.title;
+  });
 
   likeButton.addEventListener('click', handleLikeButton);
   deleteButton.addEventListener('click', handleDeleteButton);
