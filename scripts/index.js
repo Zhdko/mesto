@@ -1,6 +1,5 @@
 const content = document.querySelector('.content')
 const editButton = content.querySelector('.button-icon_action_edit');
-const popups = document.querySelectorAll('.popup');
 const closeButtons = document.querySelectorAll('.button-icon_action_close');
 const editForm = document.querySelector('[name="edit-form"]');
 const inputUsername = document.querySelector('[name="username"]');
@@ -17,28 +16,18 @@ const addButton = content.querySelector('.button-icon_action_add');
 const gallery = content.querySelector('.gallery__list');
 const galleryTemplate = document.querySelector('#gallery-item').content.querySelector('.card');
 const addForm = document.querySelector('[name="add-form"]');
+const fullImage = document.querySelector('.full-width__image');
+const fullImageCaption = document.querySelector('.full-width__caption');
 
-const openPopupEdit = () => {
-  popupEdit.classList.toggle('popup_opened');
-  
-  if (popupEdit.classList.contains('popup_opened')) {
-  inputUsername.value = username.textContent;
-  inputUserjob.value = userjob.textContent;
-  }
+
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened')
 }
 
-const openPopupAdd = () => {
-  popupAdd.classList.toggle('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened')
 }
 
-const formSubmitHandlerEdit = (evt) => {
-  evt.preventDefault(); 
-
-  username.textContent = inputUsername.value;
-  userjob.textContent = inputUserjob.value;
-
-  openPopupEdit();
-}
 
 const createElement = (item) => {
   const galleryItem = galleryTemplate.cloneNode(true);
@@ -48,18 +37,11 @@ const createElement = (item) => {
   const deleteButton = galleryItem.querySelector('.card__delete');
 
   galleryItemImg.addEventListener('click', function() {
-    const fullImage = document.querySelector('.full-width__image');
-    const fullImageCaption = document.querySelector('.full-width__caption');
-
-    popupImage.classList.toggle('popup_opened');
+    openPopup(popupImage)
 
     fullImage.src = item.link;
     fullImage.alt = galleryItemImg.alt
     fullImageCaption.textContent = item.title;
-
-    fullImage.addEventListener('click', function () {
-      fullImage.closest('.popup').classList.remove('popup_opened');
-    })
   });
 
   likeButton.addEventListener('click', handleLikeButton);
@@ -72,6 +54,34 @@ const createElement = (item) => {
   return galleryItem;
 }
 
+const renderItem = (item) => {
+  const element = createElement(item);
+  gallery.prepend(element);
+}
+
+const formSubmitHandlerEdit = (evt) => {
+  evt.preventDefault(); 
+
+  username.textContent = inputUsername.value;
+  userjob.textContent = inputUserjob.value;
+
+  closePopup(popupEdit);
+}
+
+const formSubmitHandlerAdd = (evt) => {
+  evt.preventDefault(); 
+  
+  const galleryItem = {
+    title: inputImgtitle.value,
+    link: inputImgLink.value,
+  }
+
+  renderItem(galleryItem);
+
+  addForm.reset()
+  closePopup(popupAdd);
+}
+
 const handleLikeButton = (evt) => {
   evt.target.classList.toggle('card__like_active')
 }
@@ -80,39 +90,24 @@ const handleDeleteButton = (evt) => {
   evt.target.closest('.card').remove()
 }
 
-const createItem = (item) => {
-  const element = createElement(item);
-  gallery.prepend(element);
-}
+galleryList.forEach(renderItem)
 
-const formSubmitHandlerAdd = (evt) => {
-  evt.preventDefault(); 
-  const galleryItem = {
-    title: inputImgtitle.value,
-    link: inputImgLink.value,
-  }
-  createItem(galleryItem);
-  inputImgtitle.value = '';
-  inputImgLink.value = '';
-  openPopupAdd();
-}
+addButton.addEventListener('click', () => openPopup(popupAdd));
 
-galleryList.forEach (function(item){
-  createItem(item);
-})
-
-addButton.addEventListener('click', openPopupAdd);
-
-editButton.addEventListener('click', openPopupEdit);
+editButton.addEventListener('click', () => {
+  openPopup(popupEdit);
+  
+  inputUsername.value = username.textContent;
+  inputUserjob.value = userjob.textContent;
+});
 
 editForm.addEventListener('submit', formSubmitHandlerEdit); 
 
 addForm.addEventListener('submit', formSubmitHandlerAdd);
 
-closeButtons.forEach( function(element) {
-  element.addEventListener('click', function () {
-    popups.forEach(function(element){
-      element.classList.remove('popup_opened');
-    })
-  });
-});
+closeButtons.forEach(function (item) {
+  const close = item.closest('.popup');
+  item.addEventListener('click', () => closePopup(close))
+})
+
+fullImage.addEventListener('click', () => closePopup(popupImage))
