@@ -1,23 +1,22 @@
 const content = document.querySelector('.content')
 const editButton = content.querySelector('.button-icon_action_edit');
-const popup = document.querySelectorAll('.popup');
-const saveButton = document.querySelector('.popup__submit-btn');
-const closeButton = document.querySelectorAll('.button-icon_action_close');
-const editForm = document.querySelector('.popup__container');
-const inputUsername = document.querySelector('.popup__text_type_username');
-const inputUserjob = document.querySelector('.popup__text_type_userjob');
+const popups = document.querySelectorAll('.popup');
+const closeButtons = document.querySelectorAll('.button-icon_action_close');
+const editForm = document.querySelector('[name="edit-form"]');
+const inputUsername = document.querySelector('[name="username"]');
+const inputUserjob = document.querySelector('[name="job"]');
 const popupEdit = document.querySelector('.popup_action_edit-profile');
 const popupAdd = document.querySelector('.popup_action_add-place');
 const popupImage = document.querySelector('.popup_action_open-img')
 
 const username = content.querySelector('.profile__username');
 const userjob = content.querySelector('.profile__userjob');
-const inputImgtitle = document.querySelector('.popup__text_type_place-title');
-const inputImgLink = document.querySelector('.popup__text_type_photo-link');
+const inputImgtitle = document.querySelector('[name="place-title"]');
+const inputImgLink = document.querySelector('[name="username"]');
 const addButton = content.querySelector('.button-icon_action_add');
 const gallery = content.querySelector('.gallery__list');
 const galleryTemplate = document.querySelector('#gallery-item').content.querySelector('.card');
-const addForm = document.querySelector('.add-form');
+const addForm = document.querySelector('[name="add-form"]');
 
 const galleryList = [
   {
@@ -138,9 +137,9 @@ editForm.addEventListener('submit', formSubmitHandlerEdit);
 
 addForm.addEventListener('submit', formSubmitHandlerAdd);
 
-closeButton.forEach( function(element) {
+closeButtons.forEach( function(element) {
   element.addEventListener('click', function () {
-    popup.forEach(function(element){
+    popups.forEach(function(element){
       element.classList.remove('popup_opened');
     })
   });
