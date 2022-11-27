@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./page/index.css">
+  <script src="./scripts/index.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -17,10 +18,10 @@
       <div class="profile__container">
         <div class="profile__info">
           <h1 class="profile__username">Жак-Ив Кусто</h1>
-          <button type="button" class="button-icon button-icon_action_edit"></button>
+          <button type="button" class="button-icon button-icon_action_edit" aria-label="Редактировать профиль"></button>
           <p class="profile__userjob">Исследователь океана</p>
         </div>
-        <button type="button" class="button-icon button-icon_action_add"></button>
+        <button type="button" class="button-icon button-icon_action_add" aria-label="Добавить новое фото"></button>
       </div>
     </section>
     <section class="gallery">
@@ -37,12 +38,12 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="edit-form" class="edit-form">
         <fieldset class="popup__input-container">
-          <input type="text" name="username" class="popup__text popup__text_type_username" placeholder="Дэвид Боуи">
-          <input type="text" name="job" class="popup__text popup__text_type_userjob" placeholder="Певец">
+          <input type="text" name="username" class="popup__text popup__text_type_username" placeholder="Имя" required>
+          <input type="text" name="job" class="popup__text popup__text_type_userjob" placeholder="Профессия">
         </fieldset>
-        <button class="popup__submit-btn" type="submit">Сохранить</button>
+        <button class="popup__submit-btn" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
-      <button type="button" class="button-icon button-icon_action_close"></button>
+      <button type="button" class="button-icon button-icon_action_close" aria-label="Закрыть"></button>
     </div>
   </div>
   <div class="popup popup_action_add-place">
@@ -51,18 +52,18 @@
       <form name="add-place-form" class="add-form">
         <fieldset class="popup__input-container">
           <input type="text" name="place-title" class="popup__text popup__text_type_place-title" placeholder="Название">
-          <input type="text" name="photo-link" class="popup__text popup__text_type_photo-link" placeholder="Ссылка на картинку">
+          <input type="url" name="photo-link" class="popup__text popup__text_type_photo-link" placeholder="Ссылка на картинку" required>
         </fieldset>
-        <button class="popup__submit-btn" type="submit">Сохранить</button>
+        <button class="popup__submit-btn" type="submit" aria-label="Создать">Создать</button>
       </form>
-      <button type="button" class="button-icon button-icon_action_close"></button>
+      <button type="button" class="button-icon button-icon_action_close" aria-label="Закрыть"></button>
     </div>
   </div>
   <div class="popup popup_action_open-img">
     <figure class="full-width">
       <img class="full-width__image">
       <figcaption class="full-width__caption"></figcaption>
-      <button type="button" class="button-icon button-icon_action_close"></button>
+      <button type="button" class="button-icon button-icon_action_close" aria-label="Закрыть"></button>
     </figure>
   </div>
   <template id="gallery-item">
@@ -72,11 +73,10 @@
       </div>
       <div class="card__footer">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like"></button>
+        <button type="button" class="card__like" aria-label="Лайк"></button>
       </div>
-      <button type="button" class="card__delete"></button>
+      <button type="button" class="card__delete" aria-label="Удалить"></button>
     </li>
   </template>
-  <script src="./scripts/index.js"></script>
 </body>
 </html>
