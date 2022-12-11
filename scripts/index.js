@@ -33,7 +33,7 @@ const openPopup = (popup) => {
   document.addEventListener('keyup', handlerKeyUp);
 }
 
-const closePopup = (popup) => {
+const closePopup = (popup, form, input, config) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keyup', handlerKeyUp);
 }

@@ -1,12 +1,21 @@
-const checkInputValidity = (form, input, config) => {
+const showInputError = (form, input, config) => {
   const error = form.querySelector(`.${input.id}-error`);
+  error.textContent = input.validationMessage;
+  input.classList.add(config.inputErrorClass)
+}
 
+const hideInputError = (form, input, config) => {
+  const error = form.querySelector(`.${input.id}-error`);
+  error.textContent = '';
+  input.classList.remove(config.inputErrorClass)
+}
+
+
+const checkInputValidity = (form, input, config) => {
   if (!input.validity.valid) {
-    error.textContent = input.validationMessage;
-    input.classList.add(config.inputErrorClass)
+    showInputError(form, input, config)
   } else {
-    error.textContent = '';
-    input.classList.remove(config.inputErrorClass)
+    hideInputError(form, input, config)
   }
 }
 
