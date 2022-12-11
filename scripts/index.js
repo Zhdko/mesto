@@ -1,34 +1,45 @@
 const content = document.querySelector('.content')
-const editButton = content.querySelector('.button-icon_action_edit');
-const closeButtons = document.querySelectorAll('.button-icon_action_close');
-const editForm = document.querySelector('[name="edit-form"]');
-const inputUsername = document.querySelector('[name="username"]');
-const inputUserjob = document.querySelector('[name="job"]');
-const popupEdit = document.querySelector('.popup_action_edit-profile');
-const popupAdd = document.querySelector('.popup_action_add-place');
-const popupImage = document.querySelector('.popup_action_open-img')
 
+const closeButtons = document.querySelectorAll('.button-icon_action_close');
+
+//edit profile info form
+const editButton = content.querySelector('.button-icon_action_edit');
 const username = content.querySelector('.profile__username');
 const userjob = content.querySelector('.profile__userjob');
-const inputImgtitle = document.querySelector('[name="place-title"]');
-const inputImgLink = document.querySelector('[name="photo-link"]');
+const popupEdit = document.querySelector('.popup_action_edit-profile');
+const editForm = document.forms.edit;
+const inputUsername = editForm.elements.username
+const inputUserjob = editForm.elements.job
+
+// add card form
 const addButton = content.querySelector('.button-icon_action_add');
+const popupAdd = document.querySelector('.popup_action_add-place');
+const addForm = document.forms.add
+const inputImgtitle = addForm.elements.title
+const inputImgLink = addForm.elements.link
 const gallery = content.querySelector('.gallery__list');
 const galleryTemplate = document.querySelector('#gallery-item').content.querySelector('.card');
-const addForm = document.querySelector('[name="add-form"]');
+
+// full-image popup
+const popupImage = document.querySelector('.popup_action_open-img')
 const fullImage = document.querySelector('.full-width__image');
 const fullImageCaption = document.querySelector('.full-width__caption');
+const popups = document.querySelectorAll('.popup')
 
 
+// open and close popup
 const openPopup = (popup) => {
-  popup.classList.add('popup_opened')
+  popup.classList.add('popup_opened');
+  document.addEventListener('keyup', handlerKeyUp);
 }
 
 const closePopup = (popup) => {
-  popup.classList.remove('popup_opened')
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handlerKeyUp);
 }
 
 
+// create new card
 const createElement = (item) => {
   const galleryItem = galleryTemplate.cloneNode(true);
   const galleryItemTitle = galleryItem.querySelector('.card__title');
@@ -59,18 +70,14 @@ const renderItem = (item) => {
   gallery.prepend(element);
 }
 
-const formSubmitHandlerEdit = (evt) => {
-  evt.preventDefault(); 
-
+const formSubmitHandlerEdit = () => {
   username.textContent = inputUsername.value;
   userjob.textContent = inputUserjob.value;
 
   closePopup(popupEdit);
 }
 
-const formSubmitHandlerAdd = (evt) => {
-  evt.preventDefault(); 
-  
+const formSubmitHandlerAdd = () => {
   const galleryItem = {
     title: inputImgtitle.value,
     link: inputImgLink.value,
@@ -78,20 +85,32 @@ const formSubmitHandlerAdd = (evt) => {
 
   renderItem(galleryItem);
 
-  addForm.reset()
+  addForm.reset();
   closePopup(popupAdd);
 }
 
+const handlerKeyUp = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+// likes
 const handleLikeButton = (evt) => {
   evt.target.classList.toggle('card__like_active')
 }
 
+
+// delete card
 const handleDeleteButton = (evt) => {
   evt.target.closest('.card').remove()
 }
 
 galleryList.forEach(renderItem)
 
+
+// listeners
 addButton.addEventListener('click', () => openPopup(popupAdd));
 
 editButton.addEventListener('click', () => {
@@ -105,9 +124,20 @@ editForm.addEventListener('submit', formSubmitHandlerEdit);
 
 addForm.addEventListener('submit', formSubmitHandlerAdd);
 
-closeButtons.forEach(function (item) {
+closeButtons.forEach((item) => {
   const close = item.closest('.popup');
-  item.addEventListener('click', () => closePopup(close))
+  const form = close.querySelector('.form')
+  item.addEventListener('click', () => {
+    closePopup(close)
+    form.reset()
+  })
 })
 
-fullImage.addEventListener('click', () => closePopup(popupImage))
+fullImage.addEventListener('click', () => closePopup(popupImage));
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    const popup = evt.target;
+    closePopup(popup);
+  })
+})

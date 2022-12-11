@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./page/index.css">
+  <script src="./scripts/validate.js" defer></script>
   <script src="./scripts/cards.js" defer></script>
   <script src="./scripts/index.js" defer></script>
   <title>Mesto</title>
@@ -37,10 +38,12 @@
   <div class="popup popup_action_edit-profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="edit-form">
+      <form name="edit" class="form" novalidate>
         <fieldset class="popup__input-container">
-          <input type="text" name="username" class="popup__text" placeholder="Имя" required>
-          <input type="text" name="job" class="popup__text" placeholder="Профессия">
+          <input id="username" type="text" name="username" class="popup__text" placeholder="Имя" required minlength="2" maxlength="40">
+          <span class="username-error error"></span>
+          <input id="job" type="text" name="job" class="popup__text" placeholder="О себе" required minlength="2" maxlength="200">
+          <span class="job-error error"></span>
         </fieldset>
         <button class="popup__submit-btn" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
@@ -50,12 +53,14 @@
   <div class="popup popup_action_add-place">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="add-form">
+      <form name="add" class="form" novalidate>
         <fieldset class="popup__input-container">
-          <input type="text" name="place-title" class="popup__text" placeholder="Название">
-          <input type="url" name="photo-link" class="popup__text" placeholder="Ссылка на картинку" required>
+          <input id="card-title" type="text" name="title" class="popup__text" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="card-title-error error"></span>
+          <input id="card-link" type="url" name="link" class="popup__text" placeholder="Ссылка на картинку" required>
+          <span class="card-link-error error"></span>
         </fieldset>
-        <button class="popup__submit-btn" type="submit" aria-label="Создать">Создать</button>
+        <button class="popup__submit-btn popup__submit-btn_invalid" type="submit" aria-label="Создать" disabled>Создать</button>
       </form>
       <button type="button" class="button-icon button-icon_action_close" aria-label="Закрыть"></button>
     </div>
