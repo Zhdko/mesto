@@ -43,8 +43,6 @@ const enableValidation = (config) => {
     const inputs = Array.from(form.querySelectorAll(inputSelector))
     const button = form.querySelector(submitButtonSelector);
   
-    form.addEventListener('submit', evt => evt.preventDefault());
-  
     inputs.forEach(input => {
       input.addEventListener('input', () => {
   
@@ -56,11 +54,13 @@ const enableValidation = (config) => {
   });
 }
 
-enableValidation({
+config = {
   formSelector: '.form',
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__submit-btn',
   inactiveButtonClass: 'popup__submit-btn_invalid',
   inputErrorClass: 'popup__text_invalid',
   errorClass: 'popup__error_visible'
-})
+}
+
+enableValidation(config);

@@ -12,6 +12,7 @@
   transition: opacity 0.3s ease;
   cursor: pointer;
   width: 100%;
+  margin-top: 18px;
 }
 
 .popup__submit-btn:hover {
@@ -22,4 +23,7 @@
   .popup__submit-btn {
     font-size: 14px;
   }
+}
+.popup__submit-btn:invalid {
+  cursor: default;
 }

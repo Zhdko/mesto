@@ -6,7 +6,3 @@
   display: block;
   object-fit: cover;
 }
-
-.full-width__image:hover {
-  cursor: zoom-out;
-}

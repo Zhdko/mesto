@@ -33,7 +33,7 @@ const openPopup = (popup) => {
   document.addEventListener('keyup', handlerKeyUp);
 }
 
-const closePopup = (popup, form, input, config) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keyup', handlerKeyUp);
 }
@@ -70,14 +70,14 @@ const renderItem = (item) => {
   gallery.prepend(element);
 }
 
-const formSubmitHandlerEdit = () => {
+const handleFormEditSubmit = () => {
   username.textContent = inputUsername.value;
   userjob.textContent = inputUserjob.value;
 
   closePopup(popupEdit);
 }
 
-const formSubmitHandlerAdd = () => {
+const handleFormAddSubmit = () => {
   const galleryItem = {
     title: inputImgtitle.value,
     link: inputImgLink.value,
@@ -111,7 +111,14 @@ galleryList.forEach(renderItem)
 
 
 // listeners
-addButton.addEventListener('click', () => openPopup(popupAdd));
+addButton.addEventListener('click', () => {
+  openPopup(popupAdd);
+  addForm.reset();
+
+  const button = popupAdd.querySelector('.popup__submit-btn');
+  button.classList.add('popup__submit-btn_invalid');
+  button.disabled = 'disabled'
+});
 
 editButton.addEventListener('click', () => {
   openPopup(popupEdit);
@@ -120,24 +127,29 @@ editButton.addEventListener('click', () => {
   inputUserjob.value = userjob.textContent;
 });
 
-editForm.addEventListener('submit', formSubmitHandlerEdit); 
+editForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
 
-addForm.addEventListener('submit', formSubmitHandlerAdd);
+  handleFormEditSubmit();
+}); 
+
+addForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  handleFormAddSubmit();
+});
 
 closeButtons.forEach((item) => {
   const close = item.closest('.popup');
-  const form = close.querySelector('.form')
   item.addEventListener('click', () => {
     closePopup(close)
-    form.reset()
   })
-})
-
-fullImage.addEventListener('click', () => closePopup(popupImage));
+});
 
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    const popup = evt.target;
-    closePopup(popup);
+    if (evt.target === popup) {
+      closePopup(popup);
+    }
   })
 })
