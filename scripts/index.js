@@ -21,11 +21,10 @@ const gallery = content.querySelector('.gallery__list');
 const galleryTemplate = document.querySelector('#gallery-item').content.querySelector('.card');
 
 // full-image popup
-const popupImage = document.querySelector('.popup_action_open-img')
+const popupImage = document.querySelector('.popup_action_open-img');
 const fullImage = document.querySelector('.full-width__image');
 const fullImageCaption = document.querySelector('.full-width__caption');
-const popups = document.querySelectorAll('.popup')
-
+const popups = document.querySelectorAll('.popup');
 
 // open and close popup
 const openPopup = (popup) => {
@@ -39,36 +38,74 @@ const closePopup = (popup) => {
 }
 
 
-// create new card
-const createElement = (item) => {
-  const galleryItem = galleryTemplate.cloneNode(true);
-  const galleryItemTitle = galleryItem.querySelector('.card__title');
-  const galleryItemImg = galleryItem.querySelector('.card__image');
-  const likeButton = galleryItem.querySelector('.card__like');
-  const deleteButton = galleryItem.querySelector('.card__delete');
+class Card {
+  constructor(data, templateSelector) {
+    this._title = data.title;
+    this._imgLink = data.link;
+    this._templateSelector = templateSelector;
+  }
 
-  galleryItemImg.addEventListener('click', function() {
-    openPopup(popupImage)
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
+    return cardElement
+  }
 
-    fullImage.src = item.link;
-    fullImage.alt = galleryItemImg.alt
-    fullImageCaption.textContent = item.title;
-  });
+  generateCard() {
+    this._element = this._getTemplate();
+    
+    this._element.querySelector('.card__image').src = this._imgLink;
+    this._element.querySelector('.card__title').textContent = this._title;
+    this._element.querySelector('.card__image').alt = `${this._title}. Автор: ${username.textContent}`
 
-  likeButton.addEventListener('click', handleLikeButton);
-  deleteButton.addEventListener('click', handleDeleteButton);
+    this._setEventListeners();
 
-  galleryItemImg.src = item.link;
-  galleryItemImg.alt = `${item.title}. Автор: ${username.textContent}`
-  galleryItemTitle.textContent = item.title;
+    return this._element;
+  }
 
-  return galleryItem;
+  _handlerDeleteCard() {
+    this._element.remove();
+  }
+
+  _handlerLikeBtn() {
+    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  }
+
+  _handleOpenFullImg() {
+    openPopup(popupImage);
+
+    fullImage.src = this._imgLink;
+    fullImage.alt = `${this._title}. Автор: ${username.textContent}`
+    fullImageCaption.textContent = this._title;
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.card__image').addEventListener('click', () => {
+      this._handleOpenFullImg();
+    });
+
+    this._element.querySelector('.card__delete').addEventListener('click', () => {
+      this._handlerDeleteCard();
+    });
+
+    this._element.querySelector('.card__like').addEventListener('click', () => {
+      this._handlerLikeBtn();
+    });
+  }
 }
 
-const renderItem = (item) => {
-  const element = createElement(item);
-  gallery.prepend(element);
+const renderCard = (item) => {
+  const card = new Card(item, '#gallery-item');
+  const cardElement = card.generateCard();
+  document.querySelector('.gallery__list').prepend(cardElement);
 }
+
+galleryList.forEach((item) => {
+  renderCard(item)
+});
 
 const handleFormEditSubmit = () => {
   username.textContent = inputUsername.value;
@@ -83,7 +120,7 @@ const handleFormAddSubmit = () => {
     link: inputImgLink.value,
   }
 
-  renderItem(galleryItem);
+  renderCard(galleryItem);
 
   addForm.reset();
   closePopup(popupAdd);
@@ -95,19 +132,6 @@ const handlerKeyUp = (evt) => {
     closePopup(popupOpened);
   }
 }
-
-// likes
-const handleLikeButton = (evt) => {
-  evt.target.classList.toggle('card__like_active')
-}
-
-
-// delete card
-const handleDeleteButton = (evt) => {
-  evt.target.closest('.card').remove()
-}
-
-galleryList.forEach(renderItem)
 
 
 // listeners
