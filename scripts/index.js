@@ -21,6 +21,7 @@ const popupAdd = document.querySelector('.popup_action_add-place');
 const addForm = document.forms.add
 const inputImgtitle = addForm.elements.title
 const inputImgLink = addForm.elements.link
+const gallery = document.querySelector('.gallery__list')
 
 // full-image popup
 const popups = document.querySelectorAll('.popup');
@@ -29,9 +30,6 @@ const popups = document.querySelectorAll('.popup');
 export const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keyup', handlerKeyUp);
-
-  editFormValidation.enableValidation();
-  addFormValidation.enableValidation();
 }
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
@@ -41,11 +39,11 @@ const closePopup = (popup) => {
 const renderCard = (item) => {
   const card = new Card(item, '#gallery-item');
   const cardElement = card.generateCard();
-  document.querySelector('.gallery__list').prepend(cardElement);
+  return cardElement
 }
 
 galleryList.forEach((item) => {
-  renderCard(item)
+  gallery.prepend(renderCard(item))
 });
 
 const handleFormEditSubmit = () => {
@@ -61,7 +59,7 @@ const handleFormAddSubmit = () => {
     link: inputImgLink.value,
   }
 
-  renderCard(card);
+  gallery.prepend(renderCard(card));
 
   addForm.reset();
   closePopup(popupAdd);
@@ -80,9 +78,7 @@ addButton.addEventListener('click', () => {
   openPopup(popupAdd);
   addForm.reset();
 
-  const button = popupAdd.querySelector('.popup__submit-btn');
-  button.classList.add('popup__submit-btn_invalid');
-  button.disabled = 'disabled'
+  addFormValidation.disableSubmitButton();
 });
 
 editButton.addEventListener('click', () => {
@@ -122,3 +118,6 @@ popups.forEach((popup) => {
 
 const addFormValidation = new FormValidator(config, addForm);
 const editFormValidation = new FormValidator(config, editForm);
+
+editFormValidation.enableValidation();
+addFormValidation.enableValidation();

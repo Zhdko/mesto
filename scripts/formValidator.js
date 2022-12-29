@@ -50,8 +50,13 @@ export class FormValidator {
     })
   }
 
+  disableSubmitButton() {
+    this._button.classList.add(config.inactiveButtonClass);
+    this._button.disabled = 'disabled'
+  }
+
   enableValidation() {
-    this._setEventListeners()
+    this._setEventListeners();
   };
 }
 
