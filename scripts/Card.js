@@ -1,12 +1,15 @@
-import {openPopup} from './index.js'
+import {openPopup, openImagePopup} from './utils.js';
+import {username} from './index.js';
+
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openImagePopup) {
     this._title = data.title;
     this._imgLink = data.link;
     this._templateSelector = templateSelector;
     this._fullImg = document.querySelector('.full-width__image');
     this._fullImgCaption = document.querySelector('.full-width__caption');
     this._popupImage = document.querySelector('.popup_action_open-img')
+    this._openImagePopup = openImagePopup
   }
 
   _getTemplate() {
@@ -30,15 +33,15 @@ export class Card {
     return this._element;
   }
 
-  _handlerDeleteCard() {
+  _handleDeleteBtn() {
     this._element.remove();
   }
 
-  _handlerLikeBtn() {
+  _handleLikeBtn() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
 
-  _handleOpenFullImg() {
+  _openFullImg() {
     openPopup(this._popupImage);
 
     this._fullImg.src = this._imgLink;
@@ -48,15 +51,15 @@ export class Card {
 
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleOpenFullImg();
+      this._openFullImg();
     });
 
     this._element.querySelector('.card__delete').addEventListener('click', () => {
-      this._handlerDeleteCard();
+      this._handleDeleteBtn();
     });
 
     this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._handlerLikeBtn();
+      this._handleLikeBtn();
     });
   }
 }

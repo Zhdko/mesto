@@ -1,20 +1,21 @@
 export class FormValidator {
-  constructor(config, formSelector) {
-    this._formSelector = formSelector;
-    this._button = this._formSelector.querySelector(config.submitButtonSelector);
-    this._inputs = Array.from(this._formSelector.querySelectorAll(config.inputSelector));
+  constructor(setting, form) {
+    this._setting = setting
+    this._form = form;
+    this._button = this._form.querySelector(this._setting.submitButtonSelector);
+    this._inputs = Array.from(this._form.querySelectorAll(this._setting.inputSelector));
   }
 
   _showInputError(input) {
-    const error = this._formSelector.querySelector(`.${input.id}-error`);
+    const error = this._form.querySelector(`.${input.id}-error`);
     error.textContent = input.validationMessage;
-    input.classList.add(config.inputErrorClass);
+    input.classList.add(this._setting.inputErrorClass);
   }
   
   _hideInputError(input) {
-    const error = this._formSelector.querySelector(`.${input.id}-error`);
+    const error = this._form.querySelector(`.${input.id}-error`);
     error.textContent = '';
-    input.classList.remove(config.inputErrorClass);
+    input.classList.remove(this._setting.inputErrorClass);
   }
 
   _checkInputValidity(input) {
@@ -31,11 +32,11 @@ export class FormValidator {
     })
     
     if (!isFormValid) {
-      this._button.classList.add(config.inactiveButtonClass);
-      this._button.disabled = 'disabled';
+      this._button.classList.add(this._setting.inactiveButtonClass);
+      this._button.disabled = true;
     } else {
-      this._button.classList.remove(config.inactiveButtonClass);
-      this._button.disabled = '';
+      this._button.classList.remove(this._setting.inactiveButtonClass);
+      this._button.disabled = false;
     }
   }
 
@@ -51,8 +52,8 @@ export class FormValidator {
   }
 
   disableSubmitButton() {
-    this._button.classList.add(config.inactiveButtonClass);
-    this._button.disabled = 'disabled'
+    this._button.classList.add(this._setting.inactiveButtonClass);
+    this._button.disabled = true
   }
 
   enableValidation() {

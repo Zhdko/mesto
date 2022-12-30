@@ -1,109 +1,101 @@
 import {FormValidator, config} from './formValidator.js';
 import {Card} from './Card.js';
 import {galleryList} from './CardsArray.js';
+import {openPopup, closePopup} from './utils.js';
 
 const content = document.querySelector('.content');
 
-const closeButtons = document.querySelectorAll('.button-icon_action_close');
+const buttonsCloseList = document.querySelectorAll('.button-icon_action_close');
 
 //edit profile info form
-const editButton = content.querySelector('.button-icon_action_edit');
-const username = content.querySelector('.profile__username');
-const userjob = content.querySelector('.profile__userjob');
+const buttonEdit = content.querySelector('.button-icon_action_edit');
+export const username = content.querySelector('.profile__username');
+const userJob = content.querySelector('.profile__userjob');
 const popupEdit = document.querySelector('.popup_action_edit-profile');
-const editForm = document.forms.edit;
-const inputUsername = editForm.elements.username
-const inputUserjob = editForm.elements.job
+const formEdit = document.forms.edit;
+const inputUsername = formEdit.elements.username
+const inputUserJob = formEdit.elements.job
 
 // add card form
-const addButton = content.querySelector('.button-icon_action_add');
+const buttonAdd = content.querySelector('.button-icon_action_add');
 const popupAdd = document.querySelector('.popup_action_add-place');
-const addForm = document.forms.add
-const inputImgtitle = addForm.elements.title
-const inputImgLink = addForm.elements.link
+const formAdd = document.forms.add
+const inputImgTitle = formAdd.elements.title
+const inputImgLink = formAdd.elements.link
 const gallery = document.querySelector('.gallery__list')
 
-// full-image popup
+
 const popups = document.querySelectorAll('.popup');
 
-// open and close popup
-export const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keyup', handlerKeyUp);
-}
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handlerKeyUp);
-}
+// form validator
+const addFormValidation = new FormValidator(config, formAdd);
+const editFormValidation = new FormValidator(config, formEdit);
 
-const renderCard = (item) => {
-  const card = new Card(item, '#gallery-item');
+
+
+const createCard = (cardData) => {
+  const card = new Card(cardData, '#gallery-item');
   const cardElement = card.generateCard();
   return cardElement
 }
 
-galleryList.forEach((item) => {
-  gallery.prepend(renderCard(item))
+galleryList.forEach((cardData) => {
+  gallery.prepend(createCard(cardData))
 });
 
 const handleFormEditSubmit = () => {
   username.textContent = inputUsername.value;
-  userjob.textContent = inputUserjob.value;
+  userJob.textContent = inputUserJob.value;
 
   closePopup(popupEdit);
 }
 
 const handleFormAddSubmit = () => {
   const card = {
-    title: inputImgtitle.value,
+    title: inputImgTitle.value,
     link: inputImgLink.value,
   }
 
-  gallery.prepend(renderCard(card));
+  gallery.prepend(createCard(card));
 
-  addForm.reset();
+  formAdd.reset();
   closePopup(popupAdd);
 }
 
-const handlerKeyUp = (evt) => {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
+const handleAddButton = () => {
+  openPopup(popupAdd);
+  formAdd.reset();
+  addFormValidation.disableSubmitButton();
+}
+
+const handleEditButton = () => {
+  openPopup(popupEdit);
+  inputUsername.value = username.textContent;
+  inputUserJob.value = userJob.textContent;
 }
 
 
 // listeners
-addButton.addEventListener('click', () => {
-  openPopup(popupAdd);
-  addForm.reset();
+buttonAdd.addEventListener('click', handleAddButton);
 
-  addFormValidation.disableSubmitButton();
-});
+buttonEdit.addEventListener('click', handleEditButton);
 
-editButton.addEventListener('click', () => {
-  openPopup(popupEdit);
-  
-  inputUsername.value = username.textContent;
-  inputUserjob.value = userjob.textContent;
-});
-
-editForm.addEventListener('submit', (evt) => {
+formEdit.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   handleFormEditSubmit();
 }); 
 
-addForm.addEventListener('submit', (evt) => {
+formAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   handleFormAddSubmit();
 });
 
-closeButtons.forEach((item) => {
-  const close = item.closest('.popup');
+buttonsCloseList.forEach((item) => {
+  const popup = item.closest('.popup');
   item.addEventListener('click', () => {
-    closePopup(close)
+    closePopup(popup)
   })
 });
 
@@ -115,9 +107,6 @@ popups.forEach((popup) => {
   })
 });
 
-
-const addFormValidation = new FormValidator(config, addForm);
-const editFormValidation = new FormValidator(config, editForm);
 
 editFormValidation.enableValidation();
 addFormValidation.enableValidation();
