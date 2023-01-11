@@ -2,14 +2,14 @@ import {openPopup, openImagePopup} from './utils.js';
 import {username} from './index.js';
 
 export class Card {
-  constructor(data, templateSelector, openImagePopup) {
+  constructor(data, templateSelector, openPopup) {
     this._title = data.title;
     this._imgLink = data.link;
     this._templateSelector = templateSelector;
     this._fullImg = document.querySelector('.full-width__image');
     this._fullImgCaption = document.querySelector('.full-width__caption');
-    this._popupImage = document.querySelector('.popup_action_open-img')
-    this._openImagePopup = openImagePopup
+    this._popupImage = document.querySelector('.popup_action_open-img');
+    this._openPopup = openPopup
   }
 
   _getTemplate() {
@@ -23,12 +23,13 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    
-    this._element.querySelector('.card__image').src = this._imgLink;
-    this._element.querySelector('.card__title').textContent = this._title;
-    this._element.querySelector('.card__image').alt = `${this._title}. Автор: ${username.textContent}`
+    const image =  this._element.querySelector('.card__image');
 
-    this._setEventListeners();
+    image.src = this._imgLink;
+    image.alt = `${this._title}. Автор: ${username.textContent}`;
+    this._element.querySelector('.card__title').textContent = this._title;
+
+    this._setEventListeners(image);
 
     return this._element;
   }
@@ -49,8 +50,8 @@ export class Card {
     this._fullImgCaption.textContent = this._title;
   }
 
-  _setEventListeners() {
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+  _setEventListeners(image) {
+    image.addEventListener('click', () => {
       this._openFullImg();
     });
 

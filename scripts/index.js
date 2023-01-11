@@ -34,7 +34,7 @@ const editFormValidation = new FormValidator(config, formEdit);
 
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, '#gallery-item');
+  const card = new Card(cardData, '#gallery-item', openPopup);
   const cardElement = card.generateCard();
   return cardElement
 }
