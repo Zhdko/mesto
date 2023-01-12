@@ -1,15 +1,14 @@
-import {openPopup, openImagePopup} from './utils.js';
+import {openPopup} from './utils.js';
 import {username} from './index.js';
 
 export class Card {
-  constructor(data, templateSelector, openPopup) {
+  constructor(data, templateSelector, openPopup, openImagePopup) {
     this._title = data.title;
     this._imgLink = data.link;
     this._templateSelector = templateSelector;
-    this._fullImg = document.querySelector('.full-width__image');
-    this._fullImgCaption = document.querySelector('.full-width__caption');
     this._popupImage = document.querySelector('.popup_action_open-img');
-    this._openPopup = openPopup
+    this._openPopup = openPopup;
+    this._openImagePopup = openImagePopup
   }
 
   _getTemplate() {
@@ -23,13 +22,14 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    const image =  this._element.querySelector('.card__image');
+    this._image = this._element.querySelector('.card__image');
+    this._like = this._element.querySelector('.card__like');
 
-    image.src = this._imgLink;
-    image.alt = `${this._title}. Автор: ${username.textContent}`;
+    this._image.src = this._imgLink;
+    this._image.alt = `${this._title}. Автор: ${username.textContent}`;
     this._element.querySelector('.card__title').textContent = this._title;
 
-    this._setEventListeners(image);
+    this._setEventListeners();
 
     return this._element;
   }
@@ -39,19 +39,18 @@ export class Card {
   }
 
   _handleLikeBtn() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._like.classList.toggle('card__like_active');
   }
 
   _openFullImg() {
     openPopup(this._popupImage);
-
-    this._fullImg.src = this._imgLink;
-    this._fullImg.alt = `${this._title}. Автор: ${username.textContent}`
-    this._fullImgCaption.textContent = this._title;
+    const name = this._title;
+    const link = this._imgLink;
+    this._openImagePopup({name, link})
   }
 
-  _setEventListeners(image) {
-    image.addEventListener('click', () => {
+  _setEventListeners() {
+    this._image.addEventListener('click', () => {
       this._openFullImg();
     });
 

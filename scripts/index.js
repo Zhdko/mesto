@@ -1,7 +1,7 @@
 import {FormValidator, config} from './formValidator.js';
 import {Card} from './Card.js';
 import {galleryList} from './CardsArray.js';
-import {openPopup, closePopup} from './utils.js';
+import {openPopup, closePopup, openImagePopup} from './utils.js';
 
 const content = document.querySelector('.content');
 
@@ -28,13 +28,13 @@ const gallery = document.querySelector('.gallery__list')
 const popups = document.querySelectorAll('.popup');
 
 // form validator
-const addFormValidation = new FormValidator(config, formAdd);
-const editFormValidation = new FormValidator(config, formEdit);
+const cardFormValidation = new FormValidator(config, formAdd);
+const profileFormValidation = new FormValidator(config, formEdit);
 
 
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, '#gallery-item', openPopup);
+  const card = new Card(cardData, '#gallery-item', openPopup, openImagePopup);
   const cardElement = card.generateCard();
   return cardElement
 }
@@ -62,13 +62,13 @@ const handleFormAddSubmit = () => {
   closePopup(popupAdd);
 }
 
-const handleAddButton = () => {
+const handleAddButtonClick = () => {
   openPopup(popupAdd);
   formAdd.reset();
-  addFormValidation.disableSubmitButton();
+  cardFormValidation.disableSubmitButton();
 }
 
-const handleEditButton = () => {
+const handleEditButtonClick = () => {
   openPopup(popupEdit);
   inputUsername.value = username.textContent;
   inputUserJob.value = userJob.textContent;
@@ -76,9 +76,9 @@ const handleEditButton = () => {
 
 
 // listeners
-buttonAdd.addEventListener('click', handleAddButton);
+buttonAdd.addEventListener('click', handleAddButtonClick);
 
-buttonEdit.addEventListener('click', handleEditButton);
+buttonEdit.addEventListener('click', handleEditButtonClick);
 
 formEdit.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -108,5 +108,5 @@ popups.forEach((popup) => {
 });
 
 
-editFormValidation.enableValidation();
-addFormValidation.enableValidation();
+profileFormValidation.enableValidation();
+cardFormValidation.enableValidation();

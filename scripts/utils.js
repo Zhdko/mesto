@@ -1,3 +1,5 @@
+const fullWidthImg = document.querySelector('.full-width__image');
+
 export const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keyup', handleKeyUp);
@@ -15,12 +17,8 @@ export const closePopup = (popup) => {
   document.removeEventListener('keyup', handleKeyUp);
 }
 
-export function openImagePopup({name, link}) {
-  popupImage = document.querySelector('.popup_action_open-img');
-
-  document.querySelector('.full-width__image').src = link;
-  document.querySelector('.full-width__image').alt = name;
+export const openImagePopup = ({name, link}) => {
+  fullWidthImg.src = link;
+  fullWidthImg.alt = name;
   document.querySelector('.full-width__caption').textContent = name;
-
-  openPopup(popupImage);
 }
