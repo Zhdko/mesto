@@ -1,22 +1,21 @@
-import {username} from '../constants.js';
 import { PopupWithImage } from './PopupWithImage.js';
 
 export class Card {
-  constructor({data, handleCardClick}, templateSelector) {
+  constructor({data, handleCardClick}, username, templateSelector) {
     this._title = data.title;
     this._imgLink = data.link;
+    this._username = username
     this._templateSelector = templateSelector;
     this._popupImage = '.popup_action_open-img';
     this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
-    const cardElement = document
+    return document
       .querySelector(this._templateSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
-    return cardElement
   }
 
   generateCard() {
@@ -25,7 +24,7 @@ export class Card {
     this._like = this._element.querySelector('.card__like');
 
     this._image.src = this._imgLink;
-    this._image.alt = `${this._title}. Автор: ${username.textContent}`;
+    this._image.alt = `${this._title}. Автор: ${this._username.textContent}`;
     this._element.querySelector('.card__title').textContent = this._title;
 
     this._setEventListeners();
