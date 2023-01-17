@@ -1,11 +1,11 @@
-import '../page/index.css'
-import {buttonEdit, formEdit, inputUsername, inputUserJob, gallery, buttonAdd, formAdd} from '../constants.js'
-import {FormValidator, config} from '../components/FormValidator.js';
-import {galleryList} from '../scripts/cardsArray.js';
+import './index.css'
+import {buttonEdit, formEdit, inputUsername, inputUserJob, gallery, buttonAdd, formAdd, config} from '../utils/constants.js'
+import {FormValidator} from '../components/FormValidator.js';
+import {galleryList} from '../utils/cardsArray.js';
 import {Section} from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import { createCard } from '../utils.js/utils';
+import { createCard } from '../utils/utils';
 
 const cardFormValidation = new FormValidator(config, formAdd);
 const profileFormValidation = new FormValidator(config, formEdit);
@@ -15,14 +15,16 @@ const cardsList = new Section({items: galleryList, renderer: cardData => {
 }}, '.gallery__list');
 
 const user = new UserInfo({about: '.profile__userjob', username: '.profile__username'}); 
-const popupEdit = new PopupWithForm({popupSelector: '.popup_action_edit-profile',
+const popupEdit = new PopupWithForm({popupSelector: '.popup_action_edit-profile', inputSelector: '.popup__text',
   handleFormSubmit: (formData) => { 
+    user.setUserInfo({formData}),
+    popupEdit.close()
   }
 });
 
-const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place', 
+const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place', inputSelector: '.popup__text', 
   handleFormSubmit: (formData) => {
-    gallery.prepend(createCard(formData));
+    cardsList.addItem(createCard(formData));
     popupAdd.close()
   }
 })
@@ -30,12 +32,6 @@ const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place',
 const handleAddButtonClick = () => {
   popupAdd.open()
   cardFormValidation.disableSubmitButton();
-}
-
-const handleFormEditSubmit = () => {
-  user.setUserInfo({name: inputUsername, about: inputUserJob})
-
-  popupEdit.close()
 }
 
 const handleEditButtonClick = () => {
@@ -52,13 +48,6 @@ const handleEditButtonClick = () => {
 buttonAdd.addEventListener('click', handleAddButtonClick);
 
 buttonEdit.addEventListener('click', handleEditButtonClick);
-
-formEdit.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  handleFormEditSubmit();
-}); 
-
 profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 

@@ -1,11 +1,10 @@
 import {Popup} from './Popup.js'
-import { fullWidthCaption, fullWidthImg } from '../constants.js';
 
 export class PopupWithImage extends Popup {
-  constructor({popupSelector}) {
+  constructor({popupSelector}, img, caption) {
     super({popupSelector}),
-    this._img = fullWidthImg,
-    this._caption = fullWidthCaption
+    this._img = document.querySelector(img),
+    this._caption = document.querySelector(caption)
   }
 
   open({name, link}) {

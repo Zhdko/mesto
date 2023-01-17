@@ -9,11 +9,11 @@
 </head>
 <body class="page">
   <header class="header">
-    <a href="./index.html" class="link"><img src="<%=require('../image/logo.svg')%>"  alt="Место.Россия." class="logo logo_place_header"></a>
+    <a href="./index.html" class="link"><img src="<%=require('./images/logo.svg')%>"  alt="Место.Россия." class="logo logo_place_header"></a>
   </header>
   <main class="content page__content">
     <section class="profile">
-      <img src="<%=require('../image/avatar.jpg')%>" alt="Фото профиля." class="profile__avatar">
+      <img src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля." class="profile__avatar">
       <div class="profile__container">
         <div class="profile__info">
           <h1 class="profile__username">Жак-Ив Кусто</h1>
@@ -33,10 +33,10 @@
   <div class="popup popup_action_edit-profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="edit" class="form popup__input-container" novalidate>
-        <input id="username" type="text" name="username" class="popup__text" placeholder="Имя" required minlength="2" maxlength="40">
+      <form name="edit" class="form edit-form popup__input-container" novalidate>
+        <input id="username" type="text" name="username" class="popup__text username" placeholder="Имя" required minlength="2" maxlength="40">
         <span class="username-error error"></span>
-        <input id="job" type="text" name="about" class="popup__text" placeholder="О себе" required minlength="2" maxlength="200">
+        <input id="job" type="text" name="about" class="popup__text about" placeholder="О себе" required minlength="2" maxlength="200">
         <span class="job-error error"></span>
         <button class="popup__submit-btn" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
@@ -46,7 +46,7 @@
   <div class="popup popup_action_add-place">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="add" class="form popup__input-container" novalidate>
+      <form name="add" class="form add-form popup__input-container" novalidate>
         <input id="card-title" type="text" name="title" class="popup__text" placeholder="Название" required minlength="2" maxlength="30">
         <span class="card-title-error error"></span>
         <input id="card-link" type="url" name="link" class="popup__text" placeholder="Ссылка на картинку" required>

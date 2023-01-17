@@ -13,8 +13,8 @@ export class UserInfo {
     }
   }
 
-  setUserInfo({name, about}) {
-    this._name.textContent = name.value;
-    this._about.textContent = about.value
+  setUserInfo({formData}) {
+    this._name.textContent = formData.username;
+    this._about.textContent = formData.about
   }
 }

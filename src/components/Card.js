@@ -1,12 +1,9 @@
-import { PopupWithImage } from './PopupWithImage.js';
-
 export class Card {
   constructor({data, handleCardClick}, username, templateSelector) {
     this._title = data.title;
     this._imgLink = data.link;
     this._username = username
     this._templateSelector = templateSelector;
-    this._popupImage = '.popup_action_open-img';
     this._handleCardClick = handleCardClick
   }
 
@@ -40,14 +37,9 @@ export class Card {
     this._like.classList.toggle('card__like_active');
   }
 
-  _openFullImg() {
-    const fullImg = new PopupWithImage({popupSelector: this._popupImage})
-    fullImg.open({name: this._title, link: this._imgLink})
-  }
-
   _setEventListeners() {
     this._image.addEventListener('click', () => {
-      this._openFullImg();
+      this._handleCardClick();
     });
 
     this._element.querySelector('.card__delete').addEventListener('click', () => {
