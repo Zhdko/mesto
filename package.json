@@ -1,0 +1,37 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "- [Обзор](#Обзор)\r   - [Описание](#Описание)\r   - [Функциональность](#Функциональность)\r   - [Скриншот](#Скриншот)\r   - [Ссылки](#Ссылки)\r - [Мой процесс](#Мой-процесс)\r   - [Построен с](#Построен-с)\r   - [Чему я научился](#Чему-я-научился)\r   - [Что хочу изучить](#Что-хочу-изучить)\r - [Автор](#Автор)",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zhdko/mesto.git"
+  },
+  "author": "Alexandr Zhdanko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zhdko/mesto/issues"
+  },
+  "homepage": "https://github.com/Zhdko/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.13",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "postcss-loader": "^7.0.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "core-js": "^3.27.1"
+  }
+}

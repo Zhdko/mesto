@@ -1,14 +1,13 @@
-import {openPopup} from './utils.js';
-import {username} from './index.js';
+import {username} from '../constants.js';
+import { PopupWithImage } from './PopupWithImage.js';
 
 export class Card {
-  constructor(data, templateSelector, openPopup, openImagePopup) {
+  constructor({data, handleCardClick}, templateSelector) {
     this._title = data.title;
     this._imgLink = data.link;
     this._templateSelector = templateSelector;
-    this._popupImage = document.querySelector('.popup_action_open-img');
-    this._openPopup = openPopup;
-    this._openImagePopup = openImagePopup
+    this._popupImage = '.popup_action_open-img';
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -43,10 +42,8 @@ export class Card {
   }
 
   _openFullImg() {
-    openPopup(this._popupImage);
-    const name = this._title;
-    const link = this._imgLink;
-    this._openImagePopup({name, link})
+    const fullImg = new PopupWithImage({popupSelector: this._popupImage})
+    fullImg.open({name: this._title, link: this._imgLink})
   }
 
   _setEventListeners() {

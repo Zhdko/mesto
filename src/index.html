@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./page/index.css">
-  <script type="module" src="./scripts/index.js" defer></script>
+  <script type="module" src="./index.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header">
-    <a href="./index.html" class="link"><img src="./image/logo.svg" alt="Место.Россия." class="logo logo_place_header"></a>
+    <a href="./index.html" class="link"><img src="<%=require('../image/logo.svg')%>"  alt="Место.Россия." class="logo logo_place_header"></a>
   </header>
   <main class="content page__content">
     <section class="profile">
-      <img src="./image/avatar.jpg" alt="Фото профиля." class="profile__avatar">
+      <img src="<%=require('../image/avatar.jpg')%>" alt="Фото профиля." class="profile__avatar">
       <div class="profile__container">
         <div class="profile__info">
           <h1 class="profile__username">Жак-Ив Кусто</h1>
@@ -37,7 +36,7 @@
       <form name="edit" class="form popup__input-container" novalidate>
         <input id="username" type="text" name="username" class="popup__text" placeholder="Имя" required minlength="2" maxlength="40">
         <span class="username-error error"></span>
-        <input id="job" type="text" name="job" class="popup__text" placeholder="О себе" required minlength="2" maxlength="200">
+        <input id="job" type="text" name="about" class="popup__text" placeholder="О себе" required minlength="2" maxlength="200">
         <span class="job-error error"></span>
         <button class="popup__submit-btn" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
