@@ -6,7 +6,6 @@ export class Popup {
   open() {
     this._popup.classList.add('popup_opened');
     document.addEventListener('keydown', (evt) => this._handleEscClose(evt))
-    this._setEventListeners(); //Не понимаю где нужно вызвать этот метод, если нельзя при открытии 
   }
 
   close() {
@@ -20,7 +19,7 @@ export class Popup {
     }
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     this._popup.querySelector('.button-icon_action_close').addEventListener('click', () => {
       this.close()
     });

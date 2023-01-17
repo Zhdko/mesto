@@ -6,8 +6,8 @@ export const createCard = (formData) => {
   const card = new Card({data: formData, handleCardClick: () =>{
     const fullImg = new PopupWithImage({popupSelector: '.popup_action_open-img'}, '.full-width__image', '.full-width__caption')
     fullImg.open({name: formData.title, link: formData.link})
+    fullImg.setEventListeners()
   }}, username, '#gallery-item');
   const cardElement = card.generateCard();
-
   return cardElement
 }

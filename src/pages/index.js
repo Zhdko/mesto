@@ -38,17 +38,16 @@ const handleEditButtonClick = () => {
   popupEdit.open()
 
   const info = user.getUserInfo()
-  
+
   inputUsername.value = info.name
   inputUserJob.value = info.about
 }
 
-
-// listeners
-buttonAdd.addEventListener('click', handleAddButtonClick);
-
-buttonEdit.addEventListener('click', handleEditButtonClick);
+cardsList.renderItems()
 profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 
-cardsList.renderItems()
+buttonAdd.addEventListener('click', handleAddButtonClick);
+buttonEdit.addEventListener('click', handleEditButtonClick);
+popupEdit.setEventListeners();
+popupAdd.setEventListeners();
