@@ -1,11 +1,15 @@
 const content = document.querySelector('.content');
 export const buttonEdit = content.querySelector('.button-icon_action_edit');
 export const username = content.querySelector('.profile__username');
+export const userAbout = content.querySelector('.profile__userjob');
+export const avatar = content.querySelector('.profile__img')
 export const formEdit = document.querySelector('.edit-form');
 export const inputUsername = formEdit.querySelector('.username')
 export const inputUserJob = formEdit.querySelector('.about')
 export const buttonAdd = content.querySelector('.button-icon_action_add');
 export const formAdd = document.querySelector('.add-form');
+export const btnEditAvatar = document.querySelector('.profile__edit-avatar');
+export const formEditAvatar = document.querySelector('.edit-avatar-form')
 
 export const config = {
   formSelector: '.form',
