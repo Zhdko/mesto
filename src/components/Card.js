@@ -39,21 +39,55 @@ export class Card {
     return this._element;
   }
 
-  setLike() {
-    const likeCount = this._element.querySelector('.like__counter');
-    likeCount.textContent = this._likesArr.length;
+  _checkLike() {
+    return this._likesArr.some(user => user._id === this._userId)
+  }
 
-    if(likeCount.textContent === '0') {
-      likeCount.textContent = ''
+  setLike(likes) {
+    const likeCount = this._element.querySelector('.like__counter');
+    
+
+    if(likes){
+      this._likesArr = likes.likes
     }
 
     if(this._checkLike()) {
       this._like.classList.add('card__like_active');
+      likeCount.textContent = this._likesArr.length;
+        if(likeCount.textContent === '0') {
+          likeCount.textContent = ''
+        }
     } else {
       this._like.classList.remove('card__like_active');
+      likeCount.textContent = this._likesArr.length;
+        if(likeCount.textContent === '0') {
+          likeCount.textContent = ''
+        }
     } 
   }
 
+
+  // setLikeOut(likes) {
+
+  //   this.likes = likes.likes
+  //   const likeCount = this._element.querySelector('.like__counter');
+  //   likeCount.textContent = this.likes.length;
+
+  //   if(likeCount.textContent === '0') {
+  //     likeCount.textContent = ''
+  //   }
+
+  //   const checkIsLiked = () => {
+  //     return this.likes.some(user => user._id === this._userId)
+  //   }
+
+  //   if(checkIsLiked()) {
+  //     this._like.classList.add('card__like_active');
+  //   } else {
+  //     this._like.classList.remove('card__like_active');
+  //   } 
+  // }
+  
   deleteCard () {
     this._element.remove();
     this._element = null;
@@ -62,11 +96,6 @@ export class Card {
   _handleDeleteBtn() {
     this._handleDeleteBtnClick(this._cardId)
   }
-
-  _checkLike() {
-    return this._likesArr.some(user => user._id === this._userId)
-  }
-
 
 
   _handleLikeBtn() {

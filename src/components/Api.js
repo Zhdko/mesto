@@ -1,5 +1,3 @@
-import { data } from "autoprefixer"
-
 export class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl,
@@ -7,7 +5,11 @@ export class Api {
   }
 
   _checkResponce(res) { 
-    (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    if(res.ok) {
+      return res.json()
+    } else {
+      return  Promise.reject(`Ошибка: ${res.status}`)
+    }
 }
 
   getInitialCards() {
@@ -15,7 +17,7 @@ export class Api {
     return fetch(cardsUrl, {
     headers: this._headers
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   getUserData() {
@@ -26,7 +28,7 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   setUserInfo(userData) {
@@ -38,7 +40,7 @@ export class Api {
         about: userData.about
       })
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
   addNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -49,7 +51,7 @@ export class Api {
         link: data.link
       })
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   deleteCard(cardId) {
@@ -57,7 +59,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   _setLike(cardId) {
@@ -65,7 +67,7 @@ export class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   _deleteLike(cardId) {
@@ -73,7 +75,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 
   toggleLike(cardId, isLiked) {
@@ -92,7 +94,7 @@ export class Api {
         avatar: data.link
       })
     })
-      .then((res) => (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then((res) => this._checkResponce(res))
   }
 }
 

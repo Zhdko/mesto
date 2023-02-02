@@ -55,11 +55,9 @@ const handleDeleteBtnClick = (cardId) => {
 
 
 
-const handleLikeCard = (cardId, isLiked, count) => {
+const handleLikeCard = (cardId, isLiked) => {
   api.toggleLike(cardId, isLiked)
-    .then(res => {
-      count.textContent = res.likes.length
-    })
+    .then(res =>  cardsArray[cardId].setLike(res))
 }
 
 const createCard = (formData) => {
