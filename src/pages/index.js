@@ -21,6 +21,12 @@ const api = new Api({
   }
 })
 
+const fullImg = new PopupWithImage({popupSelector: '.popup_action_open-img'}, '.full-width__image', '.full-width__caption');
+
+const user = new UserInfo({about: '.profile__userjob', username: '.profile__username', avatar: '.profile__img'}); 
+
+const section = new Section(cardData => createCard(cardData), '.gallery__list');
+
 const cardsArray = {}
 
 // Загрузка данных о пользователе 
@@ -30,34 +36,15 @@ api.getUserData()
     userAbout.textContent = userData.about;
     avatar.src = userData.avatar
     user.getUserId(userData)
-  });
+  })
+  .catch((err) => console.log(err))
 
 api.getInitialCards()
   .then(res => section.renderItems(res))
+  .catch((err) => console.log(err))
 
 const openImage = (imageData) => {
   fullImg.open({name: imageData.name, link: imageData.link})
-}
-
-const popupDel = new PopupWithConfirmation({popupSelector: '.popup_action_delete-card'},(cardId) => {
-  api.deleteCard(cardId)
-   .then(() => {
-    popupDel.close()
-    cardsArray[cardId].deleteCard()
-   })
-})
-
-const handleDeleteBtnClick = (cardId) => {
-  popupDel.setTarget(cardId)
-  console.log(cardId)
-  popupDel.open()
-}
-
-
-
-const handleLikeCard = (cardId, isLiked) => {
-  api.toggleLike(cardId, isLiked)
-    .then(res =>  cardsArray[cardId].setLike(res))
 }
 
 const createCard = (formData) => {
@@ -67,38 +54,70 @@ const createCard = (formData) => {
   return cardElement
 }
 
-const fullImg = new PopupWithImage({popupSelector: '.popup_action_open-img'}, '.full-width__image', '.full-width__caption');
-
-const user = new UserInfo({about: '.profile__userjob', username: '.profile__username', avatar: '.profile__img'}); 
-
-const section = new Section(cardData => createCard(cardData), '.gallery__list');
+// Попапы
+const popupDel = new PopupWithConfirmation({popupSelector: '.popup_action_delete-card'},(cardId) => {
+  popupDel.disableSubmitBtn()
+  api.deleteCard(cardId)
+   .then(() => {
+    popupDel.close()
+    cardsArray[cardId].deleteCard()
+   })
+   .catch((err) => popupDel.renderError(err))
+   .finally(() => popupDel.unDisableSubmitBtn())
+})
 
 const popupEdit = new PopupWithForm({popupSelector: '.popup_action_edit-profile', inputSelector: '.popup__text',
   handleFormSubmit: (formData) => { 
+    popupEdit.disableSubmitBtn()
     api.setUserInfo(formData)
       .then(res => {
         user.setUserInfo(res)
+        popupEdit.close()
       })
-    popupEdit.close()
+      .catch((err) => popupEdit.renderError(err))
+      .finally(() => popupEdit.unDisableSubmitBtn())
   }
 });
 
 const popupEditAvatar = new PopupWithForm({popupSelector: '.popup_action_edit-avatar', inputSelector: '.popup__text',
   handleFormSubmit: (formData) => {
     console.log(formData)
+    popupEditAvatar.disableSubmitBtn()
     api.editAvatar(formData)
-      .then((res) => user.setAvatar(res))
-    popupEditAvatar.close()
-  }})
+      .then((res) => {
+        user.setAvatar(res)
+        popupEditAvatar.close()
+      })
+      .catch((err) => popupEditAvatar.renderError(err))
+      .finally(() => popupEditAvatar.unDisableSubmitBtn())
+  }
+});
 
 const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place', inputSelector: '.popup__text', 
   handleFormSubmit: (formData) => {
+    popupAdd.disableSubmitBtn()
     api.addNewCard(formData)
       .then(res => {
-        section.addItem(createCard(res))})
-    popupAdd.close()
+        section.addItem(createCard(res))
+        popupAdd.close()
+      })
+      .catch((err) => popupAdd.renderError(err))
+      .finally(() => popupAdd.unDisableSubmitBtn()) 
   }
 });
+
+//Обработчики
+const handleDeleteBtnClick = (cardId) => {
+  popupDel.setTarget(cardId)
+  console.log(cardId)
+  popupDel.open()
+}
+
+const handleLikeCard = (cardId, isLiked) => {
+  api.toggleLike(cardId, isLiked)
+    .then(res =>  cardsArray[cardId].setLike(res))
+    .catch((err) => console.log(err))
+}
 
 const handleEditAvatarBtnClick = () => {
   popupEditAvatar.open()
@@ -123,7 +142,7 @@ profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 editAvatarFormValidation.enableValidation()
 
-
+// Слушатели
 buttonAdd.addEventListener('click', handleAddButtonClick);
 buttonEdit.addEventListener('click', handleEditButtonClick);
 btnEditAvatar.addEventListener('click', handleEditAvatarBtnClick);
