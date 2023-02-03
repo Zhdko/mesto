@@ -7,13 +7,13 @@ export class FormValidator {
   }
 
   _showInputError(input) {
-    const error = this._form.querySelector(`.${input.id}-error`);
+    const error = this._form.querySelector(`.${input.name}-error`);
     error.textContent = input.validationMessage;
     input.classList.add(this._setting.inputErrorClass);
   }
   
   _hideInputError(input) {
-    const error = this._form.querySelector(`.${input.id}-error`);
+    const error = this._form.querySelector(`.${input.name}-error`);
     error.textContent = '';
     input.classList.remove(this._setting.inputErrorClass);
   }

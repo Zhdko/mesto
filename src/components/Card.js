@@ -73,13 +73,12 @@ export class Card {
   }
 
   _handleDeleteBtn() {
-    this._handleDeleteBtnClick(this._cardId)
+    this._handleDeleteBtnClick(this ,this._cardId)
   }
 
 
   _handleLikeBtn() {
-    const likeCount = this._element.querySelector('.like__counter');
-    this._handleLikeCard(this._cardId, this._checkLike(), likeCount)
+    this._handleLikeCard(this, this._cardId, this._checkLike())
   }
 
   _setEventListeners() {

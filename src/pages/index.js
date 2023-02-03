@@ -27,19 +27,14 @@ const user = new UserInfo({about: '.profile__userjob', username: '.profile__user
 
 const section = new Section(cardData => createCard(cardData), '.gallery__list');
 
-const cardsArray = {}
-
-// Загрузка данных о пользователе 
-api.getUserData()
-  .then((userData) => {
-    username.textContent = userData.name;
-    userAbout.textContent = userData.about;
-    avatar.src = userData.avatar
-    user.getUserId(userData)
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then((res) => {
+    username.textContent = res[0].name;
+    userAbout.textContent = res[0].about;
+    avatar.src = res[0].avatar
+    user.getUserId(res[0])
+    return res[1]
   })
-  .catch((err) => console.log(err))
-
-api.getInitialCards()
   .then(res => section.renderItems(res))
   .catch((err) => console.log(err))
 
@@ -50,17 +45,16 @@ const openImage = (imageData) => {
 const createCard = (formData) => {
   const card = new Card({data: formData, handleCardClick: () => openImage(formData)}, username, '#gallery-item', handleDeleteBtnClick, user.id, handleLikeCard)
   const cardElement = card.generateCard();
-  cardsArray[formData._id] = card
   return cardElement
 }
 
 // Попапы
-const popupDel = new PopupWithConfirmation({popupSelector: '.popup_action_delete-card'},(cardId) => {
-  popupDel.disableSubmitBtn()
+const popupDel = new PopupWithConfirmation({popupSelector: '.popup_action_delete-card'},(card, cardId) => {
+  popupDel.disableSubmitBtn('В мусор...')
   api.deleteCard(cardId)
    .then(() => {
+    card.deleteCard()
     popupDel.close()
-    cardsArray[cardId].deleteCard()
    })
    .catch((err) => popupDel.renderError(err))
    .finally(() => popupDel.unDisableSubmitBtn())
@@ -68,7 +62,7 @@ const popupDel = new PopupWithConfirmation({popupSelector: '.popup_action_delete
 
 const popupEdit = new PopupWithForm({popupSelector: '.popup_action_edit-profile', inputSelector: '.popup__text',
   handleFormSubmit: (formData) => { 
-    popupEdit.disableSubmitBtn()
+    popupEdit.disableSubmitBtn('Сохранение...')
     api.setUserInfo(formData)
       .then(res => {
         user.setUserInfo(res)
@@ -81,8 +75,7 @@ const popupEdit = new PopupWithForm({popupSelector: '.popup_action_edit-profile'
 
 const popupEditAvatar = new PopupWithForm({popupSelector: '.popup_action_edit-avatar', inputSelector: '.popup__text',
   handleFormSubmit: (formData) => {
-    console.log(formData)
-    popupEditAvatar.disableSubmitBtn()
+    popupEditAvatar.disableSubmitBtn('Сохранение...')
     api.editAvatar(formData)
       .then((res) => {
         user.setAvatar(res)
@@ -95,7 +88,7 @@ const popupEditAvatar = new PopupWithForm({popupSelector: '.popup_action_edit-av
 
 const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place', inputSelector: '.popup__text', 
   handleFormSubmit: (formData) => {
-    popupAdd.disableSubmitBtn()
+    popupAdd.disableSubmitBtn('Создаем...')
     api.addNewCard(formData)
       .then(res => {
         section.addItem(createCard(res))
@@ -107,20 +100,21 @@ const popupAdd = new PopupWithForm({popupSelector: '.popup_action_add-place', in
 });
 
 //Обработчики
-const handleDeleteBtnClick = (cardId) => {
-  popupDel.setTarget(cardId)
-  console.log(cardId)
+const handleDeleteBtnClick = (card ,cardId) => {
+  popupDel.setTarget(card, cardId)
   popupDel.open()
 }
 
-const handleLikeCard = (cardId, isLiked) => {
+const handleLikeCard = (card ,cardId, isLiked) => {
   api.toggleLike(cardId, isLiked)
-    .then(res =>  cardsArray[cardId].setLike(res))
+    .then(res =>  card.setLike(res))
     .catch((err) => console.log(err))
 }
 
 const handleEditAvatarBtnClick = () => {
   popupEditAvatar.open()
+  editAvatarFormValidation.disableSubmitButton();
+
 }
 
 const handleAddButtonClick = () => {

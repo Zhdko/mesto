@@ -6,12 +6,26 @@ export class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector('.form')
     this._inputList = Array.from(this._form.querySelectorAll(inputSelector))
+    this._button = this._form.querySelector('.popup__submit-btn');
+    this._buttonText = this._button.textContent
   }
 
   close() {
     super.close();
     this._form.reset()
   }
+
+  disableSubmitBtn(text) {
+    this._button.disabled = true;
+    this._button.textContent = text
+
+  }
+
+  unDisableSubmitBtn() {
+    this._button.disabled = false;
+    this._button.textContent = this._buttonText
+  }
+
 
   _getInputValues() {
     this._formValues = {};
